@@ -23,9 +23,7 @@ class Portion {
         if (!(o instanceof Portion)) {
             return false;
         }
-
         Portion portion = (Portion) o;
-
         return name.equals(portion.name);
     }
 }

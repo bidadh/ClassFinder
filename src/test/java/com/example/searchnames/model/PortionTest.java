@@ -48,7 +48,10 @@ public class PortionTest {
 
         final Portion portion1 = new Portion(name);
         final Portion portion2 = new Portion(name);
+        final Portion portion3 = new Portion("");
 
+        assertThat(portion1.equals(portion1)).isTrue();
         assertThat(portion1.equals(portion2)).isTrue();
+        assertThat(portion1.equals(portion3)).isFalse();
     }
 }
