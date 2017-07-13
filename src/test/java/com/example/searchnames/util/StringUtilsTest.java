@@ -40,10 +40,21 @@ public class StringUtilsTest {
         final String name = "FooBarBaz";
         final List<String> names = StringUtils.splitCamelCase(name);
 
+        assertThat(names.size()).isEqualTo(3);
         assertThat(names.contains("Foo")).isTrue();
         assertThat(names.contains("Bar")).isTrue();
         assertThat(names.contains("Baz")).isTrue();
+    }
+
+    @Test
+    public final void givenMultiOneCharacterPortionName_whenSplitCamelCase_shouldContainAllPortionsInResult() {
+        final String name = "FBB";
+        final List<String> names = StringUtils.splitCamelCase(name);
+
         assertThat(names.size()).isEqualTo(3);
+        assertThat(names.contains("F")).isTrue();
+        assertThat(names.contains("B")).isTrue();
+        assertThat(names.contains("B")).isTrue();
     }
 
     @Test(expected = IllegalArgumentException.class)
