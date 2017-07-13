@@ -41,4 +41,14 @@ public class PortionTest {
         assertThat(portion1.matches("Foob")).isEqualTo(true);
         assertThat(portion1.matches("Fooba")).isEqualTo(true);
     }
+
+    @Test
+    public final void testEquals() {
+        final String name = "Foobar";
+
+        final Portion portion1 = new Portion(name);
+        final Portion portion2 = new Portion(name);
+
+        assertThat(portion1.equals(portion2)).isTrue();
+    }
 }
