@@ -43,6 +43,7 @@ public class StringUtilsTest {
         assertThat(names.contains("Foo")).isTrue();
         assertThat(names.contains("Bar")).isTrue();
         assertThat(names.contains("Baz")).isTrue();
+        assertThat(names.size()).isEqualTo(3);
     }
 
     @Test(expected = IllegalArgumentException.class)
