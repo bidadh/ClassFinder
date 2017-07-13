@@ -11,8 +11,10 @@ import java.util.stream.Collectors;
  */
 class CamelCaseName {
     private final List<Portion> portions;
+    private final String name;
 
     CamelCaseName(String name) {
+        this.name = name;
         this.portions = StringUtils.splitCamelCase(name)
                 .stream()
                 .map(Portion::new)
@@ -21,5 +23,9 @@ class CamelCaseName {
 
     List<Portion> getPortions() {
         return portions;
+    }
+
+    boolean matches(String pattern) {
+        return new Portion(name).matches(pattern);
     }
 }

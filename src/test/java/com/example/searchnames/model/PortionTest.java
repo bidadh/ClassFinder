@@ -13,7 +13,7 @@ public class PortionTest {
     public final void givenPortion_WhenMatchSameName_ShouldReturnTrue() {
         final String name = "Foo";
         final Portion portion1 = new Portion(name);
-        assertThat(portion1.matches(name)).isEqualTo(true);
+        assertThat(portion1.matches(name)).isTrue();
     }
 
     @Test
@@ -21,7 +21,7 @@ public class PortionTest {
         final String name = "Foo";
         final String pattern = "Bar";
         final Portion portion1 = new Portion(name);
-        assertThat(portion1.matches(pattern)).isEqualTo(false);
+        assertThat(portion1.matches(pattern)).isFalse();
     }
 
     @Test
@@ -29,17 +29,17 @@ public class PortionTest {
         final String name = "Foo";
         final String pattern = "F";
         final Portion portion1 = new Portion(name);
-        assertThat(portion1.matches(pattern)).isEqualTo(true);
+        assertThat(portion1.matches(pattern)).isTrue();
     }
 
     @Test
     public final void givenPortion_WhenMatchPartOfName_ShouldReturnTrue() {
         final String name = "Foobar";
         final Portion portion1 = new Portion(name);
-        assertThat(portion1.matches("Fo")).isEqualTo(true);
-        assertThat(portion1.matches("Foo")).isEqualTo(true);
-        assertThat(portion1.matches("Foob")).isEqualTo(true);
-        assertThat(portion1.matches("Fooba")).isEqualTo(true);
+        assertThat(portion1.matches("Fo")).isTrue();
+        assertThat(portion1.matches("Foo")).isTrue();
+        assertThat(portion1.matches("Foob")).isTrue();
+        assertThat(portion1.matches("Fooba")).isTrue();
     }
 
     @Test
