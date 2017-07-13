@@ -10,14 +10,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class PortionTest {
     @Test
-    public final void givenPortion_WhenPassSameName_shouldReturnTrue() {
+    public final void givenPortion_WhenMatchSameName_ShouldReturnTrue() {
         final String name = "Foo";
         final Portion portion1 = new Portion(name);
         assertThat(portion1.matches(name)).isEqualTo(true);
     }
 
     @Test
-    public final void givenPortion_WhenPassDifferentName_shouldReturnFalse() {
+    public final void givenPortion_WhenMatchDifferentName_ShouldReturnFalse() {
         final String name = "Foo";
         final String pattern = "Bar";
         final Portion portion1 = new Portion(name);
@@ -25,7 +25,7 @@ public class PortionTest {
     }
 
     @Test
-    public final void givenPortion_WhenPassFirstCharacterInUppercase_shouldReturnTrue() {
+    public final void givenPortion_WhenMatchFirstCharacterInUppercase_ShouldReturnTrue() {
         final String name = "Foo";
         final String pattern = "F";
         final Portion portion1 = new Portion(name);
@@ -33,7 +33,7 @@ public class PortionTest {
     }
 
     @Test
-    public final void givenPortion_WhenPassPartOfName_shouldReturnTrue() {
+    public final void givenPortion_WhenMatchPartOfName_ShouldReturnTrue() {
         final String name = "Foobar";
         final Portion portion1 = new Portion(name);
         assertThat(portion1.matches("Fo")).isEqualTo(true);
