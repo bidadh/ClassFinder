@@ -127,4 +127,12 @@ public class CamelCaseNameTest {
         assertThat(name.matches("FooBarBaz ")).isFalse();
         assertThat(name.matches("FooBarCat ")).isTrue();
     }
+
+    @Test
+    public final void testToString() {
+        final String string = "FooBarBazCat";
+        final CamelCaseName name = new CamelCaseName(string);
+
+        assertThat(name.toString()).isEqualTo(string);
+    }
 }
