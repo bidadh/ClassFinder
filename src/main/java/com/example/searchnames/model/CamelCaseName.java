@@ -1,7 +1,6 @@
 package com.example.searchnames.model;
 
 import com.example.searchnames.util.StringUtils;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Iterator;
 import java.util.List;
@@ -11,11 +10,13 @@ import java.util.stream.Collectors;
  * @author Arthur Kazemi<bidadh@gmail.com>
  * @date 13/7/17 12:36 PM
  */
-class CamelCaseName {
+public class CamelCaseName {
+    private final String name;
     private final List<Portion> portions;
 
-    CamelCaseName(String name) {
+    public CamelCaseName(String name) {
         //TODO: throw exception if pass an empty string or string without class name!
+        this.name = name;
         this.portions = StringUtils.splitCamelCase(name)
                 .stream()
                 .map(Portion::new)
@@ -26,7 +27,7 @@ class CamelCaseName {
         return portions;
     }
 
-    boolean matches(String pattern) {
+    public boolean matches(String pattern) {
         Boolean exactMatchLastWord = pattern.endsWith(" ");
         List<String> patternPortions = StringUtils.splitCamelCase(pattern);
         Iterator<String> patternsIterator = patternPortions.iterator();
@@ -56,5 +57,10 @@ class CamelCaseName {
         }
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
