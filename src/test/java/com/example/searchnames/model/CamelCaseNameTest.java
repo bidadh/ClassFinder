@@ -117,4 +117,14 @@ public class CamelCaseNameTest {
 
         name.matches("foobar");
     }
+
+    @Test
+    public final void givenName_whenPatternEndsWithASpace_ShouldMatchTheLastWord() {
+        final String string = "FooBarBazCat";
+        final CamelCaseName name = new CamelCaseName(string);
+
+        assertThat(name.matches("FooBarBazCa ")).isFalse();
+        assertThat(name.matches("FooBarBaz ")).isFalse();
+        assertThat(name.matches("FooBarCat ")).isTrue();
+    }
 }
