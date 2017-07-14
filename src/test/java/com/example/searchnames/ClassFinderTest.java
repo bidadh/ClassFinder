@@ -41,4 +41,13 @@ public class ClassFinderTest {
         assertThat(matches[1]).isEqualTo("FooBarBaz");
         assertThat(matches[2]).isEqualTo("ZooBar");
     }
+
+    @Test
+    public final void givenClassFinder_whenSearchForMatchingPatternEndsWithASpace_shouldListMatchesLastWordSortedAlphabetically() {
+        Object[] matches = sut.findMatching("Bar ").toArray();
+
+        assertThat(matches.length).isEqualTo(2);
+        assertThat(matches[0]).isEqualTo("FooBar");
+        assertThat(matches[1]).isEqualTo("ZooBar");
+    }
 }
