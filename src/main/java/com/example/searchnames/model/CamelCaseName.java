@@ -2,6 +2,7 @@ package com.example.searchnames.model;
 
 import com.example.searchnames.util.StringUtils;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,10 +12,8 @@ import java.util.stream.Collectors;
  */
 class CamelCaseName {
     private final List<Portion> portions;
-    private final String name;
 
     CamelCaseName(String name) {
-        this.name = name;
         this.portions = StringUtils.splitCamelCase(name)
                 .stream()
                 .map(Portion::new)
@@ -26,6 +25,22 @@ class CamelCaseName {
     }
 
     boolean matches(String pattern) {
-        return new Portion(name).matches(pattern);
+        Iterator<String> patternsIterator = StringUtils.splitCamelCase(pattern).iterator();
+        Iterator<Portion> portionsIterator = portions.iterator();
+
+        while (patternsIterator.hasNext()) {
+            String p = patternsIterator.next();
+            Boolean m = false;
+            while (portionsIterator.hasNext() && !m) {
+                Portion namePortion = portionsIterator.next();
+                m = namePortion.matches(p);
+            }
+
+            if(!m) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

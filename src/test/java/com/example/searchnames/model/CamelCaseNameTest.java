@@ -64,7 +64,7 @@ public class CamelCaseNameTest {
     }
 
     @Test
-    public final void givenPortion_WhenMatchPartOfName_ShouldReturnTrue() {
+    public final void givenSimpleName_WhenMatchPartOfName_ShouldReturnTrue() {
         final String string = "Foobar";
         final CamelCaseName name = new CamelCaseName(string);
         assertThat(name.matches("F")).isTrue();
@@ -72,5 +72,49 @@ public class CamelCaseNameTest {
         assertThat(name.matches("Foo")).isTrue();
         assertThat(name.matches("Foob")).isTrue();
         assertThat(name.matches("Fooba")).isTrue();
+    }
+
+    @Test
+    public final void givenName_WhenMatchPatternWithCorrectOrder_ShouldReturnTrue() {
+        final String string = "FooBarBazBar";
+        final CamelCaseName name = new CamelCaseName(string);
+        assertThat(name.matches("FooBar")).isTrue();
+        assertThat(name.matches("FoBarBB")).isTrue();
+        assertThat(name.matches("FoBarBBar")).isTrue();
+        assertThat(name.matches("FooBarBazBar")).isTrue();
+        assertThat(name.matches("FoBaBaBa")).isTrue();
+        assertThat(name.matches("FoBar")).isTrue();
+        assertThat(name.matches("FoBaz")).isTrue();
+        assertThat(name.matches("FooBazBar")).isTrue();
+        assertThat(name.matches("FBBB")).isTrue();
+    }
+
+    @Test
+    public final void givenName_WhenMatchInvalidPattern_ShouldReturnFalse() {
+        final String string = "FooBarBazBar";
+        final CamelCaseName name = new CamelCaseName(string);
+
+        assertThat(name.matches("FoBz")).isFalse();
+        assertThat(name.matches("BFBB")).isFalse();
+        assertThat(name.matches("FoBarBBarz")).isFalse();
+    }
+
+    @Test
+    public final void givenName_WhenMatchPatternInInvalidOrder_ShouldReturnFalse() {
+        final String string = "FooBarBazCat";
+        final CamelCaseName name = new CamelCaseName(string);
+
+        assertThat(name.matches("FooCatBarBaz")).isFalse();
+        assertThat(name.matches("FCBB")).isFalse();
+        assertThat(name.matches("FBCB")).isFalse();
+        assertThat(name.matches("FoCaBaBz")).isFalse();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void givenName_WhenMatchLowercasePattern_ShouldThrowException() {
+        final String string = "FooBarBazCat";
+        final CamelCaseName name = new CamelCaseName(string);
+
+        name.matches("foobar");
     }
 }
